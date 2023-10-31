@@ -45,7 +45,21 @@ ImageMatrix::~ImageMatrix() {
 
 // Parameterized constructor - direct initialization with 2D matrix
 ImageMatrix::ImageMatrix(const double** inputMatrix, int imgHeight, int imgWidth){
-    
+    // Get the dimensions of the input image
+    height = imgHeight;
+    width = imgWidth;
+
+    // Allocate memory for the matrix
+    data = new double*[imgHeight];
+    for (int i = 0; i < imgHeight; ++i) {
+        data[i] = new double[imgWidth];
+    }
+
+    // Copy data from inputMatrix to data
+    for (int i = 0; i < imgHeight; ++i) {
+        for (int j = 0; j < imgWidth; j++) {
+            data[i][j] = inputMatrix[i][j];
+        }}
 }
 
 // Copy constructor
@@ -85,6 +99,6 @@ double** ImageMatrix::get_data() const {
 
 // Getter function to access the data at the index (i, j)
 double ImageMatrix::get_data(int i, int j) const {
-
+    return data[i][j];
 }
 

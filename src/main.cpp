@@ -1,11 +1,13 @@
 #include <iostream>
-
-
 #include "ImageMatrix.h"
 #include "Convolution.h"
+#include "ImageLoader.h"
+
+using namespace std;
 
 
-void main(){
+int main(){
+    const string filePath = "data/output.txt";
 
     // Create a matrix directly using direct initialization
     const double* directData1[3] = {
@@ -15,6 +17,15 @@ void main(){
     };
 
     ImageMatrix matrix1(directData1, 3, 3);    
-    
+
+    //Print the matrix elements
+    cout << "Matrix 1: " << endl;
+    for (int i = 0; i < 3; ++i) {
+        cout << "[ ";
+        for (int j = 0; j < 3; ++j) {
+            cout << matrix1.get_data(i, j) << " ";
+        }
+        cout << "]" << endl;
+    }
 
 }
