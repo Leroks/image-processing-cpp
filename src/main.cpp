@@ -7,7 +7,7 @@ using namespace std;
 
 
 int main(){
-    const string filePath = "data/output.txt";
+    const string filePath = "../data/output.txt";
 
     // Create a matrix directly using direct initialization
     const double* directData1[3] = {
@@ -27,5 +27,19 @@ int main(){
         }
         cout << "]" << endl;
     }
+
+    ImageLoader imageLoader(filePath);
+
+    ImageMatrix matrix2(filePath);
+
+    cout << "Matrix 2: " << endl;
+    for (int i = 0; i < imageLoader.getHeight(); ++i) {
+        cout << "[ ";
+        for (int j = 0; j < imageLoader.getWidth(); ++j) {
+            cout << matrix2.get_data(i, j) << " ";
+        }
+        cout << "]" << endl;
+    }
+
 
 }
