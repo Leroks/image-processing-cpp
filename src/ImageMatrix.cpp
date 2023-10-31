@@ -102,3 +102,13 @@ double ImageMatrix::get_data(int i, int j) const {
     return data[i][j];
 }
 
+// Getter function to access the height of the matrix
+int ImageMatrix::get_height() const {
+    return height;
+}
+
+// Getter function to access the width of the matrix
+int ImageMatrix::get_width() const {
+    return width;
+}
+

@@ -32,6 +32,9 @@ int main(){
 
     ImageMatrix matrix2(filePath);
 
+    cout<< "Matrix 2 height: " <<matrix2.get_height()<< endl;
+    cout<< "Matrix 2 width: " <<matrix2.get_width()<< endl;
+
     cout << "Matrix 2: " << endl;
     for (int i = 0; i < imageLoader.getHeight(); ++i) {
         cout << "[ ";
