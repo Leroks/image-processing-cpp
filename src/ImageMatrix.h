@@ -27,6 +27,8 @@ public:
     int get_height() const; // Getter function to access the height of the matrix
     int get_width() const; // Getter function to access the width of the matrix
 
+    void set_data(int i, int j, double d);
+
 private:
     // Private member variables to store the image data
     double** data; // 2D array to store image data

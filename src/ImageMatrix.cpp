@@ -217,3 +217,8 @@ int ImageMatrix::get_width() const {
     return width;
 }
 
+void ImageMatrix::set_data(int i, int j, double d) {
+    // Set the data at the index (i, j)
+    data[i][j] = d;
+}
+
