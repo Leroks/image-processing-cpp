@@ -15,28 +15,39 @@ DecodeMessage::~DecodeMessage() {
 }
 
 
-std::string DecodeMessage::decodeFromImage(const ImageMatrix& image, const std::vector<std::pair<int, int>>& edgePixels) {
-    std::string binaryString;
-    for (const auto& pixel : edgePixels) {
-        int pixelValue = image.get_data(pixel.first, pixel.second);
-        binaryString += std::bitset<8>(pixelValue).to_string().substr(0, 1);
-    }
-
-    std::string asciiString;
-    for (int i = 0; i < binaryString.length(); i += 7) {
-        std::string segment = binaryString.substr(i, 7);
-        if (segment.length() < 7) {
-            segment = std::string(7 - segment.length(), '0') + segment;
-        }
-        int asciiValue = std::bitset<7>(segment).to_ulong();
-        if (asciiValue <= 32) {
-            asciiValue += 33;
-        } else if (asciiValue == 127) {
-            asciiValue = 126;
-        }
-        asciiString += static_cast<char>(asciiValue);
-    }
-
-    return asciiString;
+int getLeastSignificantBit(int pixel) {
+    return pixel & 1;
 }
+
+std::string DecodeMessage::decodeFromImage(const ImageMatrix& image, const std::vector<std::pair<int, int>>& edgePixels) {
+    if (edgePixels.empty()) {
+        return "";
+    }
+
+    std::string msg = "";
+
+    for (const auto& pixel : edgePixels) {
+        int lsb = getLeastSignificantBit(image.get_data()[pixel.first][pixel.second]);
+        msg += std::to_string(lsb);
+    }
+
+    if (msg.size() % 7 != 0) {
+        msg = std::string(7 - (msg.size() % 7), '0') + msg;
+    }
+
+    std::string endmessage = "";
+    for (int i = 0; i < msg.size(); i += 7) {
+        std::string tmp = msg.substr(i, 7);
+        int number = std::stoi(tmp, nullptr, 2);
+        if (number <= 32) {
+            number += 33;
+        } else if (number >= 127) {
+            number = 126;
+        }
+        char c = static_cast<char>(number);
+        endmessage += c;
+    }
+    return endmessage;
+}
+
 
