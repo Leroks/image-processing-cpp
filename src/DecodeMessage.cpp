@@ -36,16 +36,16 @@ std::string DecodeMessage::decodeFromImage(const ImageMatrix& image, const std::
     }
 
     std::string finalMsg;
-    for (int i = 0; i < msg.size(); i += 7) {
-        std::string tmp = msg.substr(i, 7);
-        int number = std::stoi(tmp, nullptr, 2);
-        if (number <= 32) {
-            number += 33;
-        } else if (number >= 127) {
-            number = 126;
+    for (int index = 0; index < msg.size(); index += 7) {
+        std::string substring = msg.substr(index, 7);
+        int asciiValue = std::stoi(substring, nullptr, 2);
+        if (asciiValue <= 32) {
+            asciiValue += 33;
+        } else if (asciiValue >= 127) {
+            asciiValue = 126;
         }
-        char c = static_cast<char>(number);
-        finalMsg += c;
+        char character = static_cast<char>(asciiValue);
+        finalMsg += character;
     }
     return finalMsg;
 }
