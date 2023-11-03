@@ -13,13 +13,13 @@ Convolution::Convolution(double** customKernel, int kernelHeight, int kernelWidt
 
 // Destructor
 Convolution::~Convolution() {
-    // Deallocate memory
+/*    // Deallocate memory
     if (customKernel != nullptr) {
         for (int i = 0; i < kernelHeight; ++i) {
             delete[] customKernel[i];
         }
         delete[] customKernel;
-    }
+    }*/
 }
 
 // Copy constructor
