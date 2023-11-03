@@ -24,7 +24,7 @@ std::string DecodeMessage::decodeFromImage(const ImageMatrix& image, const std::
         return "";
     }
 
-    std::string msg = "";
+    std::string msg;
 
     for (const auto& pixel : edgePixels) {
         int lsb = getLeastSignificantBit(image.get_data()[pixel.first][pixel.second]);
@@ -35,7 +35,7 @@ std::string DecodeMessage::decodeFromImage(const ImageMatrix& image, const std::
         msg = std::string(7 - (msg.size() % 7), '0') + msg;
     }
 
-    std::string endmessage = "";
+    std::string finalMsg;
     for (int i = 0; i < msg.size(); i += 7) {
         std::string tmp = msg.substr(i, 7);
         int number = std::stoi(tmp, nullptr, 2);
@@ -45,9 +45,9 @@ std::string DecodeMessage::decodeFromImage(const ImageMatrix& image, const std::
             number = 126;
         }
         char c = static_cast<char>(number);
-        endmessage += c;
+        finalMsg += c;
     }
-    return endmessage;
+    return finalMsg;
 }
 
 
