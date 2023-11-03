@@ -57,7 +57,6 @@ ImageMatrix::ImageMatrix(const std::string &filepath) {
 
 // Destructor
 ImageMatrix::~ImageMatrix() {
-    // Deallocate memory
     for (int i = 0; i < height; ++i) {
         delete[] data[i];
     }
@@ -89,7 +88,7 @@ ImageMatrix::ImageMatrix(const ImageMatrix &other) {
     height = other.height;
     width = other.width;
 
-    // Allocate memory for the matrix
+    // Allocate memory for the matrix - deep copy
     data = new double*[height];
     for (int i = 0; i < height; ++i) {
         data[i] = new double[width];
@@ -106,7 +105,7 @@ ImageMatrix::ImageMatrix(const ImageMatrix &other) {
 // Copy assignment operator
 ImageMatrix& ImageMatrix::operator=(const ImageMatrix &other) {
     if (this == &other) {
-        return *this; // self-assignment check
+        return *this;
     }
 
     // Deallocate old memory
@@ -117,7 +116,7 @@ ImageMatrix& ImageMatrix::operator=(const ImageMatrix &other) {
         delete[] data;
     }
 
-    // Copy from other
+    // Deep copy
     height = other.height;
     width = other.width;
     data = new double*[height];
@@ -138,13 +137,12 @@ ImageMatrix& ImageMatrix::operator=(const ImageMatrix &other) {
 
 // Overloaded operator + to add two matrices
 ImageMatrix ImageMatrix::operator+(const ImageMatrix &other) const {
-    // Check if the dimensions of the two matrices are same
     if (height != other.height || width != other.width) {
-        std::cout << "Error: Dimensions of the two matrices are not same." << std::endl;
+        std::cout << "Error"<< std::endl;
         exit(1);
     }
 
-    // Create a new matrix to store the result
+    // Create a new matrix for the result
     ImageMatrix result(height, width);
 
     // Add the two matrices
@@ -155,18 +153,16 @@ ImageMatrix ImageMatrix::operator+(const ImageMatrix &other) const {
     }
 
     return result;
-    
 }
 
 // Overloaded operator - to subtract two matrices
 ImageMatrix ImageMatrix::operator-(const ImageMatrix &other) const {
-    // Check if the dimensions of the two matrices are same
     if (height != other.height || width != other.width) {
-        std::cout << "Error: Dimensions of the two matrices are not same." << std::endl;
+        std::cout << "Error" << std::endl;
         exit(1);
     }
 
-    // Create a new matrix to store the result
+    // Create a new matrix for the result
     ImageMatrix result(height, width);
 
     // Subtract the two matrices
@@ -177,7 +173,6 @@ ImageMatrix ImageMatrix::operator-(const ImageMatrix &other) const {
     }
 
     return result;
-
 }
 
 // Overloaded operator * to multiply a matrix with a scalar
@@ -193,7 +188,6 @@ ImageMatrix ImageMatrix::operator*(const double &scalar) const {
     }
 
     return result;
-
 }
 
 
@@ -218,7 +212,6 @@ int ImageMatrix::get_width() const {
 }
 
 void ImageMatrix::set_data(int i, int j, double d) {
-    // Set the data at the index (i, j)
     data[i][j] = d;
 }
 

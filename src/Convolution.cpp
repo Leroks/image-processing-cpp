@@ -47,7 +47,7 @@ Convolution::Convolution(const Convolution &other){
 // Copy assignment operator
 Convolution& Convolution::operator=(const Convolution &other) {
     if (this == &other) {
-        return *this; // self-assignment check
+        return *this;
     }
 
     // Check if customKernel has been allocated

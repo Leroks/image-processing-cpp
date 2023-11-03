@@ -30,11 +30,11 @@ ImageMatrix EncodeMessage::encodeMessageToImage(const ImageMatrix &img, const st
         }
     }
 
-    // Apply right circular shifting
+    // Right circular shifting
     int shift = std::floor(transformedMessage.length() / 2.0);
     transformedMessage = transformedMessage.substr(shift) + transformedMessage.substr(0, shift);
 
-    // Convert the transformed message into binary
+    // Converting transformed message to binary message
     std::string binaryMessage;
     for (char c : transformedMessage) {
         binaryMessage += std::bitset<8>(c).to_string().substr(1, 7);
@@ -54,5 +54,4 @@ ImageMatrix EncodeMessage::encodeMessageToImage(const ImageMatrix &img, const st
     }
 
     return encodedImage;
-
 }
