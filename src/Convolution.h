@@ -22,6 +22,11 @@ public:
 
 private:
     // Add any private member variables and functions .
+    double** customKernel;
+    int kernelHeight;
+    int kernelWidth;
+    int stride;
+    bool padding;
 };
 
 #endif // CONVOLUTION_H
